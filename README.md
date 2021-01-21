@@ -10,12 +10,13 @@ cd assignment-tracker
 npm i
 ```
 3. Run project
-For Windows:
+Development mode (nodemon):
 ```
-set DEBUG=assignment-tracker:* & npm start
+npm run dev
 ```
-For Mac/Linux:
+Normal execution:
 ```
-DEBUG=assignment-tracker:* npm start
+npm start
 ```
+
 The project should be running at [localhost:3000](http://localhost:3000)
