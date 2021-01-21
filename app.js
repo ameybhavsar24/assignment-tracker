@@ -1,20 +1,33 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const dotenv = require('dotenv');
+const logger = require('morgan');
+const connectDB = require('./config/db');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// Load environment variables
+dotenv.config();
 
-var app = express();
+// Connect to database
+connectDB();
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+const app = express();
+app.set('view engine', 'ejs');
+// Route files
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// Dev logging middleware
+if (process.env.NODE_ENV === 'development') {
+    app.use(logger('dev'));
+}  
+// Mount routers
+app.use('/api', indexRouter);
+app.use('/api/users', usersRouter);
 
-module.exports = app;
+const PORT = process.env.PORT || 5000;
+
+const server = app.listen(
+  PORT,
+  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
+);
+
+
