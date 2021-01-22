@@ -2,7 +2,7 @@
 ## Installation
 1. Clone the repo.
 ```
-git clone https://github.com/MiniProject-SE/assignment-tracker.git
+git clone https://github.com/ameybhavsar24/assignment-tracker.git
 cd assignment-tracker
 ```
 2. Install the dependencies.
