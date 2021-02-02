@@ -10,24 +10,26 @@ dotenv.config();
 connectDB();
 
 const app = express();
-app.set('view engine', 'ejs');
+
+app.use(express.json());
+
 // Route files
-const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+const index = require('./routes/index');
+const auth = require('./routes/auth');
 
 // Dev logging middleware
 if (process.env.NODE_ENV === 'development') {
     app.use(logger('dev'));
 }  
 // Mount routers
-app.use('/api', indexRouter);
-app.use('/api/users', usersRouter);
+app.use('/api', index);
+app.use('/api/auth', auth);
 
 const PORT = process.env.PORT || 5000;
 
 const server = app.listen(
   PORT,
-  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
+  console.log(`Server running in ${process.env.NODE_ENV} mode at http://localhost:${PORT}`)
 );
 
 
