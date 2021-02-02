@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'This is the Assignment Tracker API' });
+  res.send('Assignment tracker API');
 });
 
 module.exports = router;
